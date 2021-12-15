@@ -1,0 +1,15 @@
+#hero::after {
+	content: "";
+	position: absolute;
+	display: block;
+	border-width: 100px 1300px 20px 500px;
+	border-left-color: transparent;
+	border-right-color: theme("colors.gray.900");
+	border-bottom-color: theme("colors.gray.900");
+	border-top-color: transparent;
+	border-style: solid;
+	border-bottom-left-radius: 5%;
+	z-index: 1;
+	bottom: 0;
+	right: 0;
+}
