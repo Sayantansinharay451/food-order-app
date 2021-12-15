@@ -15,7 +15,7 @@ const Cart = () => {
 	return (
 		<div
 			id="cart-container"
-			className="bg-white p-8 w-5/12 h-90 rounded-2xl transform scale-0 duration-200 ease-in-out"
+			className="bg-white p-8 w-5/12 rounded-2xl transform scale-0 duration-200 ease-in-out"
 		>
 			{contextData.cartData.filter((meal) => meal.quantity > 0).length > 0 ? (
 				<>
@@ -53,10 +53,10 @@ const Cart = () => {
 					</div>
 				</>
 			) : (
-				<h1 className="text-5xl font-bold text-orange-300 text-center p-20">
+				<h1 className="text-5xl font-bold text-orange-300 text-center">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						className="h-6 w-6"
+						className="h-6 w-6 text-center"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
