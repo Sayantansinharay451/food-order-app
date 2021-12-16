@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import CartDataContext from "../../context/card-data-context";
 import CartContext from "../../context/cart-context";
 import CartItems from "./CartItems";
+import SubmitForm from "./SubmitForm";
 
 const Cart = () => {
+	const [order, setOrder] = useState(false);
 	const context = useContext(CartContext);
 	const contextData = useContext(CartDataContext);
+
+	const closeHandler = () => (order ? setOrder(false) : context.CloseCart());
 
 	useEffect(() => {
 		document.getElementById("cart-container").classList.remove("scale-0");
@@ -34,29 +38,43 @@ const Cart = () => {
 								);
 							})}
 					</div>
-					<div>
+					{order && <SubmitForm></SubmitForm>}
+					<div className="mt-5">
 						<p className="flex text-2xl font-bold">
-							<span className="flex-grow ">Total Amount:</span>
+							<span className="flex-grow ">Total Amount :</span>
 							<span>${contextData.totalCost}</span>
 						</p>
 						<div className="flex space-x-5 pt-5">
 							<button
 								className="ml-auto border-2 border-orange-700 rounded-full py-2 px-8 text-base font-medium text-orange-700 hover:text-white hover:bg-orange-700 "
-								onClick={context.CloseCart}
+								onClick={closeHandler}
 							>
 								Close
 							</button>
-							<button className="bg-orange-700 text-white rounded-full py-2 px-8 text-base font-medium hover:bg-orange-800">
-								Order
+							<button
+								{...(!order ? { hidden: true } : {})}
+								className="bg-orange-700 text-white rounded-full py-2 px-8 text-base font-medium hover:bg-orange-800"
+								type="submit"
+								htmlFor="form"
+								form="checkout-form"
+							>
+								Check Out
+							</button>
+							<button
+								{...(order ? { hidden: true } : {})}
+								className="bg-orange-700 text-white rounded-full py-2 px-8 text-base font-medium hover:bg-orange-800"
+								onClick={() => setOrder(true)}
+							>
+								Order Now
 							</button>
 						</div>
 					</div>
 				</>
 			) : (
-				<h1 className="text-5xl font-bold text-orange-300 text-center">
+				<h1 className="text-5xl font-bold text-orange-400 text-center p-5">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						className="h-6 w-6 text-center"
+						className="h-24 mx-auto"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"

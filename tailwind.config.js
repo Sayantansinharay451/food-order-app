@@ -14,6 +14,8 @@ module.exports = {
 			},
 			boxShadow: {
 				lg: "0px 0px 50px 0px rgba(0, 0, 0, 0.8)",
+				"orange-sm": "0px 0px 8px 0px rgba(255, 165, 0, 0.9)",
+				"red-sm": "0px 0px 8px 0px rgba(255, 0, 0, 0.8)",
 			},
 		},
 	},

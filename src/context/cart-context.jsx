@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
 		document.body.style.overflow = "auto";
 		setTimeout(() => {
 			setIsCartOpen(false);
-		}, 1000);
+		}, 200);
 	};
 
 	return (
