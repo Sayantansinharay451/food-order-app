@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { ErrorMessage, useField } from "formik";
 
 const FormInput = ({ label, ...props }) => {
 	const [field, meta] = useField(props);
-	// const [error, setError] = useState(false);
-	// field.onBlur(() => {
-	// 	console.log("ho");
-	// });
 	return (
 		<div className="flex mr-36 ">
 			<label htmlFor={field.name} className="text-2xl font-semibold flex-1">
