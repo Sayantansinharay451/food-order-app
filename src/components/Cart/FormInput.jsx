@@ -3,7 +3,7 @@ import { ErrorMessage, useField } from "formik";
 
 const FormInput = ({ label, ...props }) => {
 	const [field, meta] = useField(props);
-	const [error, setError] = useState(false);
+	// const [error, setError] = useState(false);
 	// field.onBlur(() => {
 	// 	console.log("ho");
 	// });
@@ -19,7 +19,7 @@ const FormInput = ({ label, ...props }) => {
 					autoComplete="nofill" // disable autofill
 					className={`py-0.5 pl-2 border-2 outline-none  rounded-lg ${
 						meta.touched && meta.error
-							? "focus:shadow-red-sm border-red-500 "
+							? "shadow-red-sm border-red-500 "
 							: "focus:shadow-orange-sm border-orange-500 mb-8"
 					}  text-lg`}
 				/>
@@ -28,8 +28,8 @@ const FormInput = ({ label, ...props }) => {
 					component="div"
 					className="text-red-600 mb-2"
 				/>
+				{/* {field.name === "postal_code" && console.log(meta.error)} */}
 			</div>
-			{/* {console.log("{", field.name, meta.error, "}")} */}
 		</div>
 	);
 };

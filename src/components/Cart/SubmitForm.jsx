@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import FormInput from "./FormInput";
 import * as Yup from "yup";
 import CartDataContext from "../../context/card-data-context";
+import CartContext from "../../context/cart-context";
 
 const SubmitForm = () => {
 	const validate = Yup.object({
@@ -15,6 +16,9 @@ const SubmitForm = () => {
 		postal_code: Yup.string()
 			.min(7, "must be of 7 characters")
 			.max(7, "must be of 7 characters")
+			// .test("len", "must be of 7 characters", (val) => {
+			// 	return val.length === 7;
+			// })
 			.required("Required"),
 		city: Yup.string()
 			.max(10, "Can't be more than 10 characters")
@@ -22,6 +26,7 @@ const SubmitForm = () => {
 	});
 
 	const contextData = useContext(CartDataContext);
+	const context = useContext(CartContext);
 
 	return (
 		<Formik
@@ -32,7 +37,7 @@ const SubmitForm = () => {
 				city: "",
 			}}
 			validationSchema={validate}
-			onSubmit={(values, { setSubmitting }) => {
+			onSubmit={(values, { setSubmitting, resetForm }) => {
 				setSubmitting(true);
 				const data = {
 					customerDetails: values,
@@ -62,6 +67,9 @@ const SubmitForm = () => {
 					}
 				};
 				submitData();
+				resetForm();
+				setTimeout(() => contextData.clearCart(), 300);
+				context.CloseCart();
 			}}
 		>
 			{(formik) => (

@@ -7,6 +7,7 @@ const CartDataContext = React.createContext({
 	removeFromCartHandler: (id) => {},
 	totalCost: 0,
 	dispatchTotalCost: (id, amount) => {},
+	clearCart: () => {},
 });
 
 const totalCostReducer = (state, action) => {
@@ -15,6 +16,8 @@ const totalCostReducer = (state, action) => {
 			return Math.round((state + action.payload + Number.EPSILON) * 100) / 100;
 		case "REMOVE":
 			return Math.round((state - action.payload + Number.EPSILON) * 100) / 100;
+		case "CLEAR":
+			return 0.0;
 		default:
 			return state;
 	}
@@ -60,6 +63,18 @@ export const CartDataProvider = ({ children }) => {
 		setCartData(newCartData);
 	};
 
+	const clearCart = () => {
+		setCartData((prevCartData) => {
+			return prevCartData.map((meal) => {
+				return {
+					...meal,
+					quantity: 0,
+				};
+			});
+		});
+		dispatchTotalCost({ type: "CLEAR" });
+	};
+
 	return (
 		<CartDataContext.Provider
 			value={{
@@ -69,6 +84,7 @@ export const CartDataProvider = ({ children }) => {
 				removeFromCartHandler,
 				totalCost,
 				dispatchTotalCost,
+				clearCart,
 			}}
 		>
 			{children}
